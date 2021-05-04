@@ -49,29 +49,39 @@ lose2 = font1.render("Игрок 2 проиграл", True (0,180,0))
 speed_x = 3
 speed_y = 3
 
-if finish != True:
-    racket1.update_l()
-    racket2.update_r()
+while game:
+    for e in event.get():
+        if e.type == QUIT:
+            game = False
 
-    ball.rect.x += speed_x
-    ball.rect.y += speed_y
+    if finish != True:
+        racket1.update_l()
+        racket2.update_r()
 
-    if sprite.collide_rect(ball, racket1) or sprite.collide_rect(ball, racket2)
-    speed_x *= -1
+        ball.rect.x += speed_x
+        ball.rect.y += speed_y
 
-    if ball.rect.y < 0 or ball.rect.y > 400:
-        speed_y += -1
+        if sprite.collide_rect(ball, racket1) or sprite.collide_rect(ball, racket2)
+        speed_x *= -1
 
-    if ball.rect.x < 0:
-        finish = True
-        window.blit(lose1, (200, 200))
+        if ball.rect.y < 0 or ball.rect.y > 400:
+            speed_y += -1
 
-    if ball.rect.x > 500:
-        finish = True
-        window.blit(lose2, (200, 200))
+        if ball.rect.x < 0:
+            finish = True
+            window.blit(lose1, (200, 200))
 
-    racket1.update_l()
-    
+        if ball.rect.x > 500:
+            finish = True
+            window.blit(lose2, (200, 200))
+
+        racket1.reset_()
+        racket2.reset_()
+        ball.reset
+
+    display.update()
+    clock.tick(FPS)
+
 
 
 
